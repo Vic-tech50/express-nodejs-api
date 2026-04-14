@@ -4,44 +4,44 @@ var router = express.Router();
 const twilio = require('twilio');
 
 
-// Twilio client initialization
-const client = new twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
+// // Twilio client initialization
+// const client = new twilio(
+//   process.env.TWILIO_ACCOUNT_SID,
+//   process.env.TWILIO_AUTH_TOKEN
+// );
 
-router.post("/send-sms-notification", async (req, res) => {
-  try {
-    const { to, body } = req.body;
+// router.post("/send-sms-notification", async (req, res) => {
+//   try {
+//     const { to, body } = req.body;
 
-    if (!to || !body) {
-      return res.status(400).json({
-        success: false,
-        message: "Recipient number and message body are required",
-      });
-    }
+//     if (!to || !body) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Recipient number and message body are required",
+//       });
+//     }
 
-    const message = await client.messages.create({
-      body,
-      to, // must be a real phone number e.g +234XXXXXXXXXX
-      from: process.env.TWILIO_PHONE_NUMBER,
-    });
+//     const message = await client.messages.create({
+//       body,
+//       to, // must be a real phone number e.g +234XXXXXXXXXX
+//       from: process.env.TWILIO_PHONE_NUMBER,
+//     });
 
-    return res.status(200).json({
-      success: true,
-      message: "SMS notification sent successfully",
-      sid: message.sid,
-    });
+//     return res.status(200).json({
+//       success: true,
+//       message: "SMS notification sent successfully",
+//       sid: message.sid,
+//     });
 
-  } catch (error) {
-    console.error("Twilio Error:", error);
+//   } catch (error) {
+//     console.error("Twilio Error:", error);
 
-    return res.status(500).json({
-      success: false,
-      message: "Failed to send SMS notification",
-    });
-  }
-});
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to send SMS notification",
+//     });
+//   }
+// });
 
 
 // // SMS notification route
